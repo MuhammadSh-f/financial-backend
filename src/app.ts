@@ -22,22 +22,16 @@ app.use("/api/import", dataImportRoutes);
 app.use("/api/health", healthCheck);
 
 // Database Connection
-const connectWithRetry = () => {
-  mongoose
-    .connect(process.env.MONGO_URI || "")
-    .then(() => {
-      logger.info("MongoDB connected");
-      app.listen(PORT, () =>
-        logger.info(`Server running at http://localhost:${PORT}`)
-      );
-    })
-    .catch((err) => {
-      logger.error(`Error connecting to MongoDB: ${err}`);
-      logger.info("Retrying connection in 5 seconds...");
-      setTimeout(connectWithRetry, 5000);
-    });
-};
-
-connectWithRetry();
+mongoose
+  .connect(process.env.MONGO_URI || "")
+  .then(() => {
+    logger.info("MongoDB connected");
+    app.listen(PORT, () =>
+      logger.info(`Server running at http://localhost:${PORT}`)
+    );
+  })
+  .catch((err) => {
+    logger.error(`Error connecting to MongoDB: ${err}`);
+  });
 
 export default app;
