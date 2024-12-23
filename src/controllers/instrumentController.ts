@@ -2,6 +2,13 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import Instrument from "../models/Instrument";
 
+interface Query {
+  $or?: { [key: string]: { $regex: string; $options: string } }[];
+  type?: string;
+  country?: string;
+  currency?: string;
+}
+
 export const getInstruments = async (
   req: Request,
   res: Response
@@ -23,19 +30,35 @@ export const getInstruments = async (
       currency,
     } = req.query;
 
-    const query: any = search
+    const query: Query = search
       ? {
           $or: [
-            { name: { $regex: search, $options: "i" } },
-            { symbol: { $regex: search, $options: "i" } },
-            { type: { $regex: search, $options: "i" } },
+            {
+              name: {
+                $regex: typeof search === "string" ? search : "",
+                $options: "i",
+              },
+            },
+            {
+              symbol: {
+                $regex: typeof search === "string" ? search : "",
+                $options: "i",
+              },
+            },
+            {
+              type: {
+                $regex: typeof search === "string" ? search : "",
+                $options: "i",
+              },
+            },
           ],
         }
       : {};
 
-    if (type) query.type = type;
-    if (country) query.country = country;
-    if (currency) query.currency = currency;
+    // Ensure type, country and currency are strings
+    if (type) query.type = typeof type === "string" ? type : "";
+    if (country) query.country = typeof country === "string" ? country : "";
+    if (currency) query.currency = typeof currency === "string" ? currency : "";
 
     const sortOrder = order === "desc" ? -1 : 1;
 
