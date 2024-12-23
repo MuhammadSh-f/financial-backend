@@ -66,4 +66,4 @@ jobs:
       # Step 3: Set up Docker Compose
       - name: Set up Docker Compose
         run: |
-          docker-compose -f docker-compose.yml up -d  # Starts the services defined in your docker-compose.yml file
+          docker compose -f docker-compose.yml up -d  # Starts the services defined in your docker-compose.yml file
