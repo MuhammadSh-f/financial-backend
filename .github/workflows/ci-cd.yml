@@ -61,5 +61,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t muhammadshaker11/your-app:latest .
-          docker push muhammadshaker11/financial-backend-app:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/financial-backend-app:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/financial-backend-app:latest
