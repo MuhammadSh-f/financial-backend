@@ -24,7 +24,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "22"
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -63,3 +63,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/financial-backend-app:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/financial-backend-app:latest
+      # Step 3: Set up Docker Compose
+      - name: Set up Docker Compose
+        run: |
+          docker-compose -f docker-compose.yml up -d  # Starts the services defined in your docker-compose.yml file
