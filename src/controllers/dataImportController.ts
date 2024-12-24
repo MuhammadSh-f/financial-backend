@@ -3,6 +3,7 @@ import { validationResult } from "express-validator";
 import Instrument from "../models/Instrument";
 import fs from "fs";
 import path from "path";
+import logger from "../utils/logger";
 
 interface ExchangeSource {
   symbol: string;
@@ -128,7 +129,7 @@ export const importData = async (
 
     res.status(200).json({ message: "All data imported successfully" });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     res.status(500).json({ error: "Failed to import data" });
   }
 };

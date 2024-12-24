@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import Instrument from "../models/Instrument";
+import logger from "../utils/logger";
 
 interface Query {
   $or?: { [key: string]: { $regex: string; $options: string } }[];
@@ -91,7 +92,7 @@ export const getInstruments = async (
       totalPages: Math.ceil(total / +limit),
     });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     res.status(500).json({ error: "Failed to fetch instruments" });
   }
 };

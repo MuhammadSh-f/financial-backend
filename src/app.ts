@@ -1,11 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import cors from "cors";
 import instrumentRoutes from "./routes/instrumentRoutes";
 import dataImportRoutes from "./routes/dataImportRoutes";
 import logger from "./utils/logger";
 import { healthCheck } from "./routes/healthRoutes";
+import { connectToMongo } from "./utils/mongoConnection";
 
 dotenv.config();
 
@@ -22,16 +22,12 @@ app.use("/api/import", dataImportRoutes);
 app.use("/api/health", healthCheck);
 
 // Database Connection
-mongoose
-  .connect(process.env.MONGO_URI || "")
-  .then(() => {
-    logger.info("MongoDB connected");
-    app.listen(PORT, () =>
-      logger.info(`Server running at http://localhost:${PORT}`)
-    );
-  })
-  .catch((err) => {
-    logger.error(`Error connecting to MongoDB: ${err}`);
-  });
+connectToMongo();
+
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () =>
+    logger.info(`Server running at http://localhost:${PORT}`)
+  );
+}
 
 export default app;
