@@ -36,6 +36,8 @@ jobs:
 
       # Step 5: Run tests
       - name: Run tests
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
         run: npm test
 
       # Step 6: Build the application
