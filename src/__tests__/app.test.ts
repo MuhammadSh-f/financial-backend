@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../app";
-import { disconnectFromMongo } from "../utils/mongoConnection";
+import { disconnectFromMongo } from "../utils/mongoConnection.js";
 
 describe("Health Check Endpoint", () => {
   afterAll(async () => {

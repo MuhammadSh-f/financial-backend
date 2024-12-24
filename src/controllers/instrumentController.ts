@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import Instrument from "../models/Instrument";
-import logger from "../utils/logger";
+import Instrument from "../models/Instrument.js";
+import logger from "../utils/logger.js";
 
 interface Query {
   $or?: { [key: string]: { $regex: string; $options: string } }[];

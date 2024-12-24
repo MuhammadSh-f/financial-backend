@@ -11,7 +11,8 @@ services:
       - "4000:4000"
     environment:
       - PORT=4000
-      - MONGO_URI=mongodb://mongo:27017/financial_instruments
+      - MONGO_URI=mongodb+srv://shaker:Mm01141004689Mm@financial-instruments.43llh.mongodb.net/?retryWrites=true&w=majority&appName=Financial-Instruments
+
     depends_on:
       - mongo
     volumes:

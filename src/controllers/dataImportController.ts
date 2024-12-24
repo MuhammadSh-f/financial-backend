@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import Instrument from "../models/Instrument";
+import Instrument from "../models/Instrument.js";
 import fs from "fs";
 import path from "path";
-import logger from "../utils/logger";
+import logger from "../utils/logger.js";
 
 interface ExchangeSource {
   symbol: string;

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { query } from "express-validator";
-import { getInstruments } from "../controllers/instrumentController";
+import { getInstruments } from "../controllers/instrumentController.js";
 
 const router = Router();
 

@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../app";
-import Instrument from "../models/Instrument";
-import { disconnectFromMongo } from "../utils/mongoConnection";
+import Instrument from "../models/Instrument.js";
+import { disconnectFromMongo } from "../utils/mongoConnection.js";
 
 const seedTestData = async () => {
   await Instrument.deleteMany({});

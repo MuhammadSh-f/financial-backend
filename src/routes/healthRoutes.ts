@@ -1,15 +1,8 @@
 import { Router } from "express";
-import mongoose from "mongoose";
+import { checkHealth } from "../controllers/healthController.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  const dbStatus =
-    mongoose.connection.readyState === 1 ? "connected" : "disconnected";
-  res.status(200).json({
-    status: "ok",
-    database: dbStatus,
-  });
-});
+router.get("/", checkHealth);
 
-export const healthCheck = router;
+export default router;
